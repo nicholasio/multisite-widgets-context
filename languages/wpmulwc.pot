@@ -1,0 +1,55 @@
+# Copyright (C) 2015 Multisite Widgets Context
+# This file is distributed under the same license as the Multisite Widgets Context package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Multisite Widgets Context 1.0.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/multisite-widgets-"
+"context\n"
+"POT-Creation-Date: 2015-04-17 19:52:53+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-04-17 16:59-0300\n"
+"Last-Translator: Nicholas Andre <nicholas@iotecnologia.com.br>\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: multisite-widgets-context.php:122
+msgid ""
+"You aren't using multisite. You need multisite in order to use this plugin"
+msgstr ""
+"Você não está usando multisite, você precisa dele habilitado para usar este "
+"plugin."
+
+#: multisite-widgets-context.php:166
+msgid "Choose the context of a site to run this widget"
+msgstr "Escolha o contexto de um site para executar este widget."
+
+#: multisite-widgets-context.php:169
+msgid "Pulls widget data from target site."
+msgstr "Extrair dados do widget do site selecionado."
+
+#. Plugin Name of the plugin/theme
+msgid "Multisite Widgets Context"
+msgstr "Multisite Widgets Context"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/nicholasio/multisite-widgets-context"
+msgstr "https://github.com/nicholasio/multisite-widgets-context"
+
+#. Description of the plugin/theme
+msgid ""
+"A WordPress Multisite Plugin that runs a Widget in a context of another site "
+"that belongs to the network"
+msgstr ""
+"Um plugin para WordPress Multisite que executa um Widget em um contexto de "
+"um outro site pertencente a rede."
+
+#. Author of the plugin/theme
+msgid "nicholas_io"
+msgstr "nicholas_io"
+
+#. Author URI of the plugin/theme
+msgid "http://nicholasandre.com.br"
+msgstr "http://nicholasandre.com.br"
