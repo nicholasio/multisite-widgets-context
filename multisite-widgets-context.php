@@ -55,7 +55,7 @@ class Multisite_Widgets_Context {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ), 999 );
 
 		//This filter fires before widget form displays
-		add_filter( 'widget_form_callback' ,  array( $this, 'before_widget_form'), 99, 2);
+		add_action( 'widget_form_callback' ,  array( $this, 'before_widget_form'), 99, 2);
 		//This action fires after widget form display (inside widget form)
 		add_action( 'in_widget_form' , array( $this, 'after_widget_form'), 99, 3 );
 
@@ -123,9 +123,6 @@ class Multisite_Widgets_Context {
 		}
 	}
 
-	/**
-	 * It's a trick: this filter fires after a widget is displayed, but we use to restore_current_blog if needed
-	 */
 	public function before_widget_form( $instance, $_this ) {
 		if ( isset( $instance[ $this->plugin_slug . '-grab-data' ] ) && isset( $instance[ $this->plugin_slug . '-site_id' ]) ) {
 
@@ -148,7 +145,7 @@ class Multisite_Widgets_Context {
 			$GLOBALS[ '_wpmulwc_switched_admin'  ] = false;
 			restore_current_blog();
 		}
-
+		
 		if ( ! current_user_can( 'manage_network ') ) return false;
 
 		$selectName = $_this->get_field_name( $this->plugin_slug . '-site_id' );
@@ -215,8 +212,9 @@ class Multisite_Widgets_Context {
 		return $instance;
 	}
 
+
 	/**
-	 * Restores previous blog if needed
+	 * It's a trick: this filter fires after a widget is displayed, but we use to restore_current_blog if needed
 	 */
 	public function after_render_previous_widget( $params ) {
 		//Before render, check if we need to restore to current blog
