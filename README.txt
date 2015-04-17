@@ -13,7 +13,7 @@ A WordPress Multisite Plugin that runs a Widget in a context of another site tha
 
 == Description ==
 
-A WordPress Multisite Plugin that let you choose any posts on any site in the network to display on the main site.
+A WordPress Multisite Plugin that runs a Widget in a context of another site that belongs to the network
 
 = How it works =
 On every Widget, this plugin adds a select menu that you can choose on which site context you will execute the widget.
