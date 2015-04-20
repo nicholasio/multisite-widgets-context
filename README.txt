@@ -45,11 +45,9 @@ As switch_to_blog does not switch plugins or theme, you need the code for shortc
 
 == Screenshots ==
 
-![A Recent Posts Widget configured to execute on another site context.](/screenshot-1.png?raw=true)
-A Recent Posts Widget configured to execute on another site context.
+1. A Recent Posts Widget configured to execute on another site context.
 
-![A Nav Menu Widget with select populated with data from target site due to checked checkbox](/screenshot-2.png?raw=true)
-A Nav Menu Widget with select populated with data from target site due to checked checkbox
+2. A Nav Menu Widget with select populated with data from target site due to checked checkbox
 
 
 == Contribute ==
