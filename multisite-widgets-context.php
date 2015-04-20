@@ -144,7 +144,7 @@ class Multisite_Widgets_Context {
 	 * Display extra fields on every single Widget registered with WordPress
 	 */
 	public function after_widget_form( $_this, $return, $instance ) {
-		if ( $GLOBALS[ '_wpmulwc_switched_admin'  ] ) {
+		if ( isset( $GLOBALS[ '_wpmulwc_switched_admin' ] ) && $GLOBALS[ '_wpmulwc_switched_admin' ] ) {
 			$GLOBALS[ '_wpmulwc_switched_admin'  ] = false;
 			restore_current_blog();
 		}
@@ -221,7 +221,7 @@ class Multisite_Widgets_Context {
 	 */
 	public function after_render_previous_widget( $params ) {
 		//Before render, check if we need to restore to current blog
-		if ( $GLOBALS[ '_wpmulwc_switched' ] ) {
+		if ( isset( $GLOBALS[ '_wpmulwc_switched' ] ) && $GLOBALS[ '_wpmulwc_switched' ] ) {
 			$GLOBALS[ '_wpmulwc_switched' ] = false;
 			restore_current_blog();	
 		}
