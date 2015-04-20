@@ -67,6 +67,9 @@ class Multisite_Widgets_Context {
 		//It's a trick: this filter fires after a widget is displayed, but we use to restore_current_blog if needed
 		add_filter( 'dynamic_sidebar_params', array( $this, 'after_render_previous_widget'), 99, 1 );
 
+		//After render all widgets return back to the original blog
+		add_action( 'dynamic_sidebar_after', array( $this, 'after_render_all_widgets' ), 99 );
+
 		$this->arrSites = array();
 		$this->blogsID  = array();
 
@@ -224,6 +227,13 @@ class Multisite_Widgets_Context {
 		}
 
 		return $params;
+	}
+
+	/**
+	 * Ensures that we will be on right blog with the last widget is switched
+	 */
+	public function after_render_all_widgets( $index ) {
+		$this->after_render_previous_widget( null );
 	}
 
 	/**
