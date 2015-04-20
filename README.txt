@@ -5,7 +5,7 @@ Donate link:
 Tags: multisite, widgets, widgets context
 Requires at least: 4.1
 Tested up to: 4.2
-Stable tag: 1.0.0
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,7 @@ No, It does't make sense to use this plugins without multisite.
 As switch_to_blog does not switch plugins or theme, you need the code for shortcode running on the site that you are EXECUTING THE WIDGET. If the shortcode is provided by a plugin, just activate the plugin on the site which you want to run the widget.
 
 == Screenshots ==
+
 
 1. A Recent Posts Widget configured to execute on another site context.
 

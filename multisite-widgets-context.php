@@ -5,7 +5,7 @@
  * Description: A WordPress Multisite Plugin that runs a Widget in a context of another site that belongs to the network 
  * Author: nicholas_io
  * Author URI: http://nicholasandre.com.br
- * Version: 1.0.0
+ * Version: 1.0.2
  * License: GPLv2 or later
  * Text Domain: wpmulwc
  * Domain Path: /languages/
