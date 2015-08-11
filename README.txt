@@ -4,8 +4,8 @@ Contributors: nicholas_io
 Donate link: 
 Tags: multisite, widgets, widgets context
 Requires at least: 4.1
-Tested up to: 4.2
-Stable tag: 1.0.2
+Tested up to: 4.3
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,12 @@ As switch_to_blog does not switch plugins or theme, you need the code for shortc
 1. A Recent Posts Widget configured to execute on another site context.
 
 2. A Nav Menu Widget with select populated with data from target site due to checked checkbox
+
+== Changelog ==
+
+= 1.0.3 =
+* Fixed a bug when a new widget is added to a sidebar and the current site isn't checked by default
+* WordPress 4.3 compatibility
 
 
 == Contribute ==

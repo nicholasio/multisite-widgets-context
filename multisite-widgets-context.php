@@ -5,7 +5,7 @@
  * Description: A WordPress Multisite Plugin that runs a Widget in a context of another site that belongs to the network 
  * Author: nicholas_io
  * Author URI: http://nicholasandre.com.br
- * Version: 1.0.2
+ * Version: 1.0.3
  * License: GPLv2 or later
  * Text Domain: wpmulwc
  * Domain Path: /languages/
@@ -122,7 +122,7 @@ class Multisite_Widgets_Context {
 	 */
 	public static function activate() { 
 		if ( ! is_multisite() ) {
-			die(__("You aren't using multisite. You need multisite in order to use this plugin") );
+			die(__("You aren't using multisite. You need multisite in order to use this plugin", 'wpmulwc') );
 		}
 	}
 
@@ -176,7 +176,7 @@ class Multisite_Widgets_Context {
 					}
 					
 					$selected = ( $blog_id == get_current_blog_id() ) ? 'selected' : '';
-					$selected = ( $site_id !== false && $blog_id == $site_id ) ? 'selected' : '';
+					$selected = ( $site_id !== false && $blog_id == $site_id ) ? 'selected' : $selected;
 
 					echo "<option value='{$blog_id}' $selected>{$this->arrSites[ $blog_id ]}</option>";
 				}
@@ -251,30 +251,3 @@ class Multisite_Widgets_Context {
 
 register_activation_hook( __FILE__ , array( 'Multisite_Widgets_Context', 'activate') );
 add_action( 'plugins_loaded', array( 'Multisite_Widgets_Context', 'get_instance' ), 0 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
