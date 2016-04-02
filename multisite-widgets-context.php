@@ -23,24 +23,26 @@ class Multisite_Widgets_Context {
 
 	/**
 	 * Plugin Slug
-	 * @var strng
+	 * @var string
 	 */
 	public $plugin_slug = 'wpmulwc';
 
 	/**
 	 * Instance of this class.
 	 *
-	 * @var object
+	 * @var Multisite_Widgets_Context
 	 */
 	protected static $instance = null;
 
 	/**
-	 * A hash with BLOG_ID => Blog_Name
+	 * An array with BLOG_ID => Blog_Name
+	 * @var Array
 	 */
 	protected $arrSites;
 
 	/**
 	 * All Blogs
+	 * @var Array
 	 */
 	protected $blogsID;
 
@@ -101,10 +103,9 @@ class Multisite_Widgets_Context {
 	public static function get_blog_ids() {
 		global $wpdb;
 
+		$blogs = esc_sql( $wpdb->blogs );
 		// get an array of blog ids
-		$sql = "SELECT blog_id FROM $wpdb->blogs
-			WHERE archived = '0' AND spam = '0'
-			AND deleted = '0'";
+		$sql = "SELECT blog_id FROM {$blogs}  WHERE archived = '0' AND spam = '0'AND deleted = '0'";
 
 		return $wpdb->get_col( $sql );
 	}
@@ -119,15 +120,24 @@ class Multisite_Widgets_Context {
 
 	/**
 	 * Callback for plugin activation
+	 *
+	 * @return void
 	 */
 	public static function activate() { 
 		if ( ! is_multisite() ) {
-			die(__("You aren't using multisite. You need multisite in order to use this plugin", 'wpmulwc') );
+			wp_die( __( "You aren't using multisite. You need multisite in order to use this plugin", 'wpmulwc' ) );
 		}
 	}
 
+	/**
+	 * Checks if we need to switch to a specific blog before displaying the widget form
+	 *
+	 * @param $instance
+	 * @param $_this
+	 * @return mixed
+	 */
 	public function before_widget_form( $instance, $_this ) {
-		if ( isset( $instance[ $this->plugin_slug . '-grab-data' ] ) && isset( $instance[ $this->plugin_slug . '-site_id' ]) ) {
+		if ( isset( $instance[ $this->plugin_slug . '-grab-data' ] ) && isset( $instance[ $this->plugin_slug . '-site_id' ] ) ) {
 
 			$site_id    =  $instance[ $this->plugin_slug . '-site_id' ];
 			$grabData   =  $instance[ $this->plugin_slug . '-grab-data'];
@@ -137,6 +147,7 @@ class Multisite_Widgets_Context {
 				switch_to_blog( $site_id );
 			}
 		}
+
 		return $instance;
 	}
 
@@ -152,8 +163,8 @@ class Multisite_Widgets_Context {
 		if ( ! current_user_can( 'manage_network ') ) return false;
 
 		$selectName = $_this->get_field_name( $this->plugin_slug . '-site_id' );
-		$site_id    = isset($instance[ $this->plugin_slug . '-site_id' ]) 	? $instance[ $this->plugin_slug . '-site_id' ] : false;
-		$grabData   = isset($instance[ $this->plugin_slug . '-grab-data' ] ) ? $instance[ $this->plugin_slug . '-grab-data'] : false;
+		$site_id    = isset( $instance[ $this->plugin_slug . '-site_id' ] ) 	? $instance[ $this->plugin_slug . '-site_id' ] : false;
+		$grabData   = isset( $instance[ $this->plugin_slug . '-grab-data' ] ) 	? $instance[ $this->plugin_slug . '-grab-data'] : false;
 		
 		if ( empty( $this->blogsID ) ) {
 			$this->blogsID = self::get_blog_ids();	
@@ -163,22 +174,24 @@ class Multisite_Widgets_Context {
 		$grabDataName = $_this->get_field_name( $this->plugin_slug . '-grab-data');
 
 		echo "<div class='multisite-widget-context-select'>";
-			echo "<p><h4>" . __('Choose the context of a site to run this widget', $this->plugin_slug) . "</h4></p>";
+			echo "<p><h4>" . __( 'Choose the context of a site to run this widget' , $this->plugin_slug ) . "</h4></p>";
 			echo "<p>";	
-				echo "<input " . checked($grabData, true, false) .  " type='checkbox' value='1' id='" . $grabDataId . "' name='" . $grabDataName . "'>";
-				echo "<label for='" . $grabDataId . "'>" .  __('Pulls widget data from target site.', $this->plugin_slug) . "</label>";
+				echo "<input " . checked( $grabData, true, false)  .  " type='checkbox' value='1' id='" . esc_attr( $grabDataId ) . "' name='" . esc_attr( $grabDataName ) . "'>";
+				echo "<label for='" . esc_attr( $grabDataId ) . "'>" .  __( 'Pulls widget data from target site.', $this->plugin_slug ) . "</label>";
 			echo "</p>";
 			echo "<p>";
-				echo "<select name='{$selectName}' class='widefat'>";
+				echo "<select name='" . esc_attr( $selectName ) . "' class='widefat'>";
 				foreach($this->blogsID as $blog_id) {
+					//save this for later
 					if ( ! isset( $this->arrSites[ $blog_id ] ) ) {
 						$this->arrSites[ $blog_id ] = get_blog_option( $blog_id, 'blogname' );
 					}
-					
+
+					//XSS ok
 					$selected = ( $blog_id == get_current_blog_id() ) ? 'selected' : '';
 					$selected = ( $site_id !== false && $blog_id == $site_id ) ? 'selected' : $selected;
 
-					echo "<option value='{$blog_id}' $selected>{$this->arrSites[ $blog_id ]}</option>";
+					echo "<option value='" . esc_attr( $blog_id ) .  "' $selected>" . esc_html( $this->arrSites[ $blog_id ] ) . "</option>";
 				}
 				echo "</select>";
 			echo "</p>";
@@ -194,8 +207,8 @@ class Multisite_Widgets_Context {
 	public function widget_update_callback( $instance, $new_instance, $old_instance, $_this ) {
 		if ( isset( $new_instance[ $this->plugin_slug . '-site_id' ] )  ) {
 			$wpmulwc_id = (int) $new_instance[ $this->plugin_slug . '-site_id' ];
-			$instance[ $this->plugin_slug . '-site_id' ] = $wpmulwc_id;
-			$instance[ $this->plugin_slug . '-grab-data' ] = $new_instance[ $this->plugin_slug . '-grab-data' ];
+			$instance[ $this->plugin_slug . '-site_id' ] 	= $wpmulwc_id;
+			$instance[ $this->plugin_slug . '-grab-data' ] 	= $new_instance[ $this->plugin_slug . '-grab-data' ];
 		}
 		return $instance;
 	}
@@ -203,10 +216,9 @@ class Multisite_Widgets_Context {
 	/**
 	 * Before render widget, check if we need to switch_to_blog
 	 */
-
 	public function before_render_widget( $instance, $_this, $args ) {
-		if ( isset( $instance[ $this->plugin_slug . '-site_id' ] )  && is_int($instance[ $this->plugin_slug . '-site_id' ]) ) {
-			if ( $instance [ $this->plugin_slug . '-site_id' ] != get_current_blog_id() ) {
+		if ( isset( $instance[ $this->plugin_slug . '-site_id' ] )  && is_int( $instance[ $this->plugin_slug . '-site_id' ] ) ) {
+			if ( $instance[ $this->plugin_slug . '-site_id' ] != get_current_blog_id() ) {
 				$GLOBALS[ '_wpmulwc_switched' ] = true;
 				switch_to_blog( (int) $instance[ $this->plugin_slug . '-site_id' ]);	
 			}
@@ -217,7 +229,8 @@ class Multisite_Widgets_Context {
 
 
 	/**
-	 * It's a trick: this filter fires after a widget is displayed, but we use to restore_current_blog if needed
+	 * It's a trick: this filter fires after a widget is displayed, we need to restore_current_blog if it's
+	 * in the switched state
 	 */
 	public function after_render_previous_widget( $params ) {
 		//Before render, check if we need to restore to current blog
@@ -230,7 +243,7 @@ class Multisite_Widgets_Context {
 	}
 
 	/**
-	 * Ensures that we will be on right blog with the last widget is switched
+	 * Ensures that we will be on the right blog if the last widget has been switched
 	 */
 	public function after_render_all_widgets( $index ) {
 		$this->after_render_previous_widget( null );
