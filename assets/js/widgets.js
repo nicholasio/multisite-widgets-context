@@ -21,6 +21,12 @@
          * After saving a widget, we need init our js code again
          */
         $( document ).on( 'widget-updated' , function( event, $widget ) {
+            var siteName    = $widget.find( '.wpmulwc-form select option:selected' ).text();
+            var $widget_h3  = $widget.find( '.widget-top .widget-title h3' );
+            var widget_name = $widget.find( '.multisite-widget-context-select' ).data( 'widget-name' );
+
+            $widget_h3.html( widget_name + ' (' + siteName + ')' );
+
             init();
         });
 

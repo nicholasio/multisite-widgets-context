@@ -239,13 +239,13 @@ class Multisite_Widgets_Context {
 		$grabDataId   = $_this->get_field_id( $this->plugin_slug . '-grab-data' );
 		$grabDataName = $_this->get_field_name( $this->plugin_slug . '-grab-data' );
 
-		echo "<div class='multisite-widget-context-select'>";
+		echo "<div class='multisite-widget-context-select' data-widget-name='" . esc_attr( $_this->name ) . "'>";
 			echo "<span class='button-wrap'>";
 				echo "<a href='#' class='button'>" . esc_html__( 'Widget Context', $this->plugin_slug ). "</a>";
 				echo "<p>" . esc_html__( 'Click to change the widget context' ) . "</p>";
 			echo "</span>";
 			echo "<div class='wpmulwc-form'>";
-				echo "<p><h4>" . esc_html__( 'Choose a site context to run this widget' , $this->plugin_slug ) . "</h4></p>";
+				echo "<h4>" . esc_html__( 'Choose a site context to run this widget' , $this->plugin_slug ) . "</h4>";
 				echo "<p>";
 					echo "<input " . checked( $grabData, true, false)  .  " type='checkbox' value='1' id='" . esc_attr( $grabDataId ) . "' name='" . esc_attr( $grabDataName ) . "'>";
 					echo "<label for='" . esc_attr( $grabDataId ) . "'>" .  esc_html__( 'Pulls widget data from target site.', $this->plugin_slug ) . "</label>";
