@@ -54,7 +54,7 @@ As switch_to_blog does not switch plugins or theme, you need the code for shortc
 
 = 1.1.0 =
 * WordPress 4.5 Compatibility
-* Code Refactoring to meet WordPress standards
+* Code Refactoring to better meet WordPress standards
 * Security enhancements: escaping and sanitization
 * Performance Improvements: Caching get_blog_ids method
 

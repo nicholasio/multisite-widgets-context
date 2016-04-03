@@ -10,14 +10,14 @@ Contributors: nicholas_io
 Donate link: 
 Tags: multisite, widgets, widgets context
 Requires at least: 4.1
-Tested up to: 4.4
-Stable tag: 1.0.3
+Tested up to: 4.5
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ## Description ##
 
-A WordPress Multisite Plugin that runs a Widget in a context of another site that belongs to the network
+A WordPress Multisite Plugin that runs a Widget in a context of another site that belongs to the network [See this on wordpress.org](https://wordpress.org/plugins/multisite-widgets-context/)
 
 ### How it works ####
 On every Widget, this plugin adds a select menu that you can choose on which site context you will execute the widget.
