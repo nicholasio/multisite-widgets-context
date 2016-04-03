@@ -184,7 +184,7 @@ class Multisite_Widgets_Context {
 		if ( isset( $widget_settings[ $widget_number ] ) ) {
 			$instance = $widget_settings[ $widget_number ];
 
-			if ( isset( $instance['wpmulwc-site_id'] ) && get_current_blog_id() !== (int) $instance['wpmulwc-site_id'] ) {
+			if ( isset( $instance['wpmulwc-site_id'] ) ) {
 				$site_context = esc_html( get_blog_option( (int) $instance['wpmulwc-site_id'], 'blogname' ) );
 				$params[0]['widget_name'] .= " ({$site_context})";
 			}
