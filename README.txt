@@ -4,8 +4,8 @@ Contributors: nicholas_io
 Donate link: 
 Tags: multisite, widgets, widgets context
 Requires at least: 4.1
-Tested up to: 4.4
-Stable tag: 1.0.3
+Tested up to: 4.5
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,13 @@ As switch_to_blog does not switch plugins or theme, you need the code for shortc
 2. A Nav Menu Widget with select populated with data from target site due to checked checkbox
 
 == Changelog ==
+
+= 1.1.0 =
+* WordPress 4.5 Compatibility
+* Code Refactoring to better meet WordPress standards
+* Security enhancements: escaping and sanitization
+* Performance Improvements: Caching get_blog_ids method
+
 
 = 1.0.3 =
 * Fixed a bug when a new widget is added to a sidebar and the current site isn't checked by default
