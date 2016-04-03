@@ -1,3 +1,28 @@
 .multisite-widget-context-select {
+	clear:both;
+	float:left;
+	width: 100%;
+}
+
+
+.multisite-widget-context-select .button-wrap {
+	width: 100%;
+	display: block;
+	float:left;
+}
+
+.multisite-widget-context-select .button-wrap .button {
+	float: left;
+	margin: 10px 0;
+}
+
+.multisite-widget-context-select .button-wrap p {
+	float:left;
+	margin: 10px;
+	line-height: 28px;
+}
+
+.multisite-widget-context-select  .wpmulwc-form {
 	border-top: 1px solid #CCC;
+	display: none;
 }
