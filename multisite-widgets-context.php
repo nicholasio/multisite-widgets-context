@@ -231,7 +231,7 @@ class Multisite_Widgets_Context {
 		$selectName = $_this->get_field_name( $this->plugin_slug . '-site_id' );
 		$site_id    = isset( $instance[ $this->plugin_slug . '-site_id' ] ) 	? $instance[ $this->plugin_slug . '-site_id' ] : false;
 		$grabData   = isset( $instance[ $this->plugin_slug . '-grab-data' ] ) 	? $instance[ $this->plugin_slug . '-grab-data'] : false;
-		
+
 		if ( empty( $this->blogsID ) ) {
 			$this->blogsID = self::get_blog_ids();	
 		}
@@ -259,7 +259,7 @@ class Multisite_Widgets_Context {
 						}
 
 						//XSS ok
-						$selected = ( $blog_id == get_current_blog_id() ) ? 'selected' : '';
+						$selected = ( $site_id === false && $blog_id == get_current_blog_id() ) ? 'selected' : '';
 						$selected = ( $site_id !== false && $blog_id == $site_id ) ? 'selected' : $selected;
 
 						echo "<option value='" . esc_attr( $blog_id ) .  "' $selected>" . esc_html( $this->arrSites[ $blog_id ] ) . "</option>";
