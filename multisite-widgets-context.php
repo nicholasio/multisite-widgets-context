@@ -5,7 +5,7 @@
  * Description: A WordPress Multisite Plugin that runs a Widget in a context of another site that belongs to the network 
  * Author: nicholas_io
  * Author URI: http://nicholasandre.com.br
- * Version: 1.1.1
+ * Version: 1.1.2
  * License: GPLv2 or later
  * Text Domain: wpmulwc
  * Domain Path: /languages/
@@ -14,7 +14,7 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit; // Exit if accessed directly.
 
-define( 'WPMULWC_VERSION', '1.1.1' );
+define( 'WPMULWC_VERSION', '1.1.2' );
 
 /**
  * Multisite Widgets Context

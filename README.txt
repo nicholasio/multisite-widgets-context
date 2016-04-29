@@ -5,7 +5,7 @@ Donate link:
 Tags: multisite, widgets, widgets context
 Requires at least: 4.1
 Tested up to: 4.5
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,9 @@ As switch_to_blog does not switch plugins or theme, you need the code for shortc
 2. A Nav Menu Widget with select populated with data from target site due to checked checkbox
 
 == Changelog ==
+
+= 1.1.2 =
+* Fixing a bug where a PHP Fatal error could happen on the append_current_site_context() method.
 
 = 1.1.1 =
 * Fixing a bug where the selected site context wasn't being persisted in some edge cases
