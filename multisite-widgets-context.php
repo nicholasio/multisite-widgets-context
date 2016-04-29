@@ -5,7 +5,7 @@
  * Description: A WordPress Multisite Plugin that runs a Widget in a context of another site that belongs to the network 
  * Author: nicholas_io
  * Author URI: http://nicholasandre.com.br
- * Version: 1.1.1
+ * Version: 1.1.2
  * License: GPLv2 or later
  * Text Domain: wpmulwc
  * Domain Path: /languages/
@@ -14,7 +14,7 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit; // Exit if accessed directly.
 
-define( 'WPMULWC_VERSION', '1.1.1' );
+define( 'WPMULWC_VERSION', '1.1.2' );
 
 /**
  * Multisite Widgets Context
@@ -179,17 +179,23 @@ class Multisite_Widgets_Context {
 		global $wp_registered_widgets;
 
 		$widget_number = $params[1]['number'];
-		$widget_settings = $wp_registered_widgets[ $params[0]['widget_id'] ]['callback'][0]->get_settings();
 
-		if ( isset( $widget_settings[ $widget_number ] ) ) {
-			$instance = $widget_settings[ $widget_number ];
+		$widget = $wp_registered_widgets[ $params[0]['widget_id'] ]['callback'][0];
 
-			if ( isset( $instance['wpmulwc-site_id'] ) ) {
-				$site_context = esc_html( get_blog_option( (int) $instance['wpmulwc-site_id'], 'blogname' ) );
-				$params[0]['widget_name'] .= " ({$site_context})";
+		if ( method_exists( $widget, 'get_settings' ) ) {
+			$widget_settings = $wp_registered_widgets[ $params[0]['widget_id'] ]['callback'][0]->get_settings();
+
+			if ( isset( $widget_settings[ $widget_number ] ) ) {
+				$instance = $widget_settings[ $widget_number ];
+
+				if ( isset( $instance['wpmulwc-site_id'] ) ) {
+					$site_context = esc_html( get_blog_option( (int) $instance['wpmulwc-site_id'], 'blogname' ) );
+					$params[0]['widget_name'] .= " ({$site_context})";
+				}
+
 			}
-
 		}
+
 
 		return $params;
 	}
